@@ -29,10 +29,11 @@ function App() {
     <>
       <Header />
       <Main />
-      <Carousel title="Favoritos" info={shuffle(info)} />
-      <Carousel title="Series" info={info} />
+      <Carousel title="Favoritos" info={shuffle(info)} zIndex={5} />
+      <Carousel title="Series" info={info} zIndex={4} />
     </>
   );
 }
 
 export default App;
+
