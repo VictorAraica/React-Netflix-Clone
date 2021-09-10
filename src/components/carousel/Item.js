@@ -43,10 +43,11 @@ export default function Item({
     clearTimeout(containerTimeout);
     clearTimeout(descriptionTimeout);
 
+    setCarouselHovered(false);
+
     setContainerTimeout(
       setTimeout(() => {
         setContainerStyle(itemStyle);
-        setCarouselHovered(false);
       }, 500)
     );
 
@@ -61,9 +62,7 @@ export default function Item({
     clearTimeout(containerTimeout);
     clearTimeout(descriptionTimeout);
 
-    setTimeout(() => {
-      setCarouselHovered(true);
-    }, 500);
+    setCarouselHovered(true);
 
     if (!moving) {
       setContainerTimeout(
@@ -119,3 +118,4 @@ export default function Item({
     </div>
   );
 }
+
