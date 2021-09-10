@@ -1,5 +1,5 @@
 import React from "react";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import Item from "./Item";
 import ArrowButton from "./ArrowButton";
 import Title from "./Title";
@@ -12,9 +12,9 @@ function getWindowDimensions() {
   };
 }
 
-export default function Carousel({ title, info }) {
+export default function Carousel({ title, info, zIndex }) {
   // w-300 es w-92%
-  const itemsContainerClass = "w-300 m-auto whitespace-nowrap";
+  const itemsContainerClass = "w-300 relative m-auto whitespace-nowrap";
   const containerWithArrowClass = `group relative`;
   const containerWithTitle = `transform relative -translate-y-1/3 mb-8`;
 
@@ -22,7 +22,6 @@ export default function Carousel({ title, info }) {
   const [moving, setMoving] = useState(false);
   const [moveSteps, setMoveSteps] = useState(6);
   const [data, setData] = useState(info.concat(info));
-  const [carouselHovered, setCarouselHovered] = useState(false);
   const [position, setPosition] = useState(0);
   const [page, setPage] = useState(0);
 
@@ -31,10 +30,6 @@ export default function Carousel({ title, info }) {
   const itemStyle = {
     transform: `translateX(${-100 * position}%)`,
     width: `${(1 / moveSteps) * 100}%`,
-  };
-
-  const hoveredCarouselStyle = {
-    zIndex: "2",
   };
 
   const handleResize = () => {
@@ -120,10 +115,7 @@ export default function Carousel({ title, info }) {
   };
 
   return (
-    <div
-      className={containerWithTitle}
-      style={carouselHovered ? hoveredCarouselStyle : {}}
-    >
+    <div className={containerWithTitle} style={{ zIndex: zIndex }}>
       <Title title={title} numPages={numPages} currentPage={page % numPages} />
       <div className={containerWithArrowClass}>
         {position === 0 ? (
@@ -139,7 +131,6 @@ export default function Carousel({ title, info }) {
                 moving={moving}
                 data={item}
                 itemStyle={itemStyle}
-                setCarouselHovered={setCarouselHovered}
                 edge={
                   position === index
                     ? "left"
