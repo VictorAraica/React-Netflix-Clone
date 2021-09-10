@@ -4,13 +4,7 @@ import Icons from "./Icons";
 import Description from "./Description";
 import Tags from "./Tags";
 
-export default function Item({
-  data,
-  itemStyle,
-  setCarouselHovered,
-  moving,
-  edge,
-}) {
+export default function Item({ data, itemStyle, moving, edge }) {
   const [containerStyle, setContainerStyle] = useState(itemStyle);
   const [descriptionStyle, setDescriptionStyle] = useState({
     opacity: `0`,
@@ -43,8 +37,6 @@ export default function Item({
     clearTimeout(containerTimeout);
     clearTimeout(descriptionTimeout);
 
-    setCarouselHovered(false);
-
     setContainerTimeout(
       setTimeout(() => {
         setContainerStyle(itemStyle);
@@ -61,9 +53,6 @@ export default function Item({
   const mouseEnter = () => {
     clearTimeout(containerTimeout);
     clearTimeout(descriptionTimeout);
-
-    setCarouselHovered(true);
-
     if (!moving) {
       setContainerTimeout(
         setTimeout(() => {
@@ -118,4 +107,3 @@ export default function Item({
     </div>
   );
 }
-
